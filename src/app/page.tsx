@@ -1,6 +1,11 @@
 import Image from 'next/image'
+import CustomGraph from './CustomGraph';
 
-export default function Home() {
+export default async function Home() {
+  const res = await fetch('https://swapi.dev/api/species/');
+  const data = (await res.json());
+  const json = JSON.stringify(data);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -108,6 +113,8 @@ export default function Home() {
           </p>
         </a>
       </div>
+
+      <CustomGraph data={data} />
     </main>
   )
 }
